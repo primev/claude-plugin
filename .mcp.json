@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "primev-fastrpc": {
+      "url": "https://fastrpc.mev-commit.xyz",
+      "transport": "http"
+    }
+  }
+}
