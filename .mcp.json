@@ -1,8 +1,9 @@
 {
   "mcpServers": {
     "primev-fastrpc": {
-      "url": "https://fastrpc.mev-commit.xyz",
-      "transport": "http"
+      "command": "node",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/mcp-server/index.js"],
+      "type": "stdio"
     }
   }
 }

@@ -22,16 +22,33 @@ claude plugin add primev/claude-plugin
 
 ### MCP Server
 
-The plugin registers `primev-fastrpc` as an MCP server pointing at `https://fastrpc.mev-commit.xyz`, giving agents direct JSON-RPC access to mev-commit's preconfirmation network on Ethereum mainnet.
+The plugin registers `primev-fastrpc` as a stdio MCP server that wraps mev-commit's FAST RPC and x402 facilitator endpoints as native MCP tools. No API keys required — all endpoints are public.
+
+**9 tools available:**
+
+| Tool | Description |
+|------|-------------|
+| `eth_blockNumber` | Get current Ethereum block number |
+| `eth_getBalance` | Get ETH balance of an address |
+| `eth_gasPrice` | Get current gas price |
+| `eth_getTransactionReceipt` | Check transaction status |
+| `eth_sendRawTransaction` | Send a preconfirmed transaction |
+| `eth_call` | Read-only contract call |
+| `eth_chainId` | Get chain ID |
+| `x402_supported` | Check supported x402 payment assets |
+| `x402_verify` | Verify an x402 payment on-chain |
+
+The MCP server runs locally via stdio — Claude Code spawns it as a subprocess. It makes HTTP calls to `https://fastrpc.mev-commit.xyz` and `https://facilitator.primev.xyz` on your behalf. No costs, no rate limits.
 
 ## Quick Start
 
 After installing, your Claude Code agent can:
 
 - Send preconfirmed transactions: *"Send 0.1 ETH to 0x... through mev-commit"*
+- Check balances: *"What's my ETH balance?"*
 - Swap tokens instantly: *"Swap 1 WETH for USDC using Fast Protocol"*
 - Pay for APIs with USDC: *"Access this x402-protected API endpoint"*
-- Check gas tank balance: *"What's my mev-commit gas tank balance?"*
+- Query chain state: *"What's the current block number and gas price?"*
 
 ## Documentation
 
