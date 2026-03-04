@@ -114,31 +114,59 @@ server.tool(
 );
 
 server.tool(
-  "eth_call",
-  "Execute a read-only contract call via FAST RPC (no gas, no state change)",
-  {
-    to: z.string().describe("Contract address (0x...)"),
-    data: z.string().describe("ABI-encoded call data (0x...)"),
-  },
-  async ({ to, data }) => {
-    const result = await rpcCall("eth_call", [{ to, data }, "latest"]);
+  "mevcommit_getTransactionCommitments",
+  "Get the preconfirmation commitments for a transaction sent through FAST RPC. Returns provider addresses, commitment signatures, and decay timestamps.",
+  { txHash: z.string().describe("Transaction hash (0x...)") },
+  async ({ txHash }) => {
+    const result = await rpcCall("mevcommit_getTransactionCommitments", [txHash]);
     if (result.error) {
       return { content: [{ type: "text", text: `Error: ${result.error.message}` }] };
     }
+    if (!result.result || result.result.length === 0) {
+      return { content: [{ type: "text", text: `No commitments found for ${txHash}. The transaction may not have been sent through FAST RPC or commitments are still pending.` }] };
+    }
+    const commitments = result.result;
+    const summary = commitments.map((c, i) => [
+      `Commitment ${i + 1}:`,
+      `  Provider: ${c.provider_address}`,
+      `  Block: ${c.block_number}`,
+      `  Bid amount: ${c.bid_amount}`,
+      `  Dispatched: ${new Date(c.dispatch_timestamp).toISOString()}`,
+    ].join("\n")).join("\n\n");
     return {
-      content: [{ type: "text", text: `Result: ${result.result}` }],
+      content: [{ type: "text", text: `${commitments.length} preconfirmation commitment(s) for ${txHash}:\n\n${summary}` }],
     };
   }
 );
 
 server.tool(
-  "eth_chainId",
-  "Get the chain ID of the FAST RPC endpoint (should be 0x1 for Ethereum mainnet)",
+  "mevcommit_optInBlock",
+  "Get the time in seconds until the next Ethereum block built by a mev-commit opted-in validator. Useful for deciding when to send transactions for preconfirmation.",
   {},
   async () => {
-    const result = await rpcCall("eth_chainId");
+    const result = await rpcCall("mevcommit_optInBlock");
+    if (result.error) {
+      return { content: [{ type: "text", text: `Error: ${result.error.message}` }] };
+    }
+    const secs = parseInt(result.result.timeInSecs, 10);
     return {
-      content: [{ type: "text", text: `Chain ID: ${parseInt(result.result, 16)} (${result.result})` }],
+      content: [{ type: "text", text: `Next mev-commit opted-in block in ${secs} seconds.${secs <= 12 ? " Good time to send a transaction for preconfirmation!" : ""}` }],
+    };
+  }
+);
+
+server.tool(
+  "mevcommit_cancelTransaction",
+  "Cancel a pending preconfirmation attempt for a transaction. If commitments have already been obtained, the transaction may still land on-chain.",
+  { txHash: z.string().describe("Transaction hash to cancel (0x...)") },
+  async ({ txHash }) => {
+    const result = await rpcCall("mevcommit_cancelTransaction", [txHash]);
+    if (result.error) {
+      return { content: [{ type: "text", text: `Error: ${result.error.message}` }] };
+    }
+    const r = result.result;
+    return {
+      content: [{ type: "text", text: `Transaction ${r.txHash}: ${r.cancelled ? "Successfully cancelled" : "Could not cancel (commitments may already exist)"}` }],
     };
   }
 );
