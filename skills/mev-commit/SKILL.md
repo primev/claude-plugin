@@ -1,6 +1,6 @@
 ---
 name: mev-commit
-description: Interact with mev-commit FAST RPC — send preconfirmed transactions, check commitments, and manage gas tank on Ethereum mainnet. Use when the user needs fast transaction confirmation or wants to send transactions through mev-commit.
+description: Interact with mev-commit FAST RPC — send preconfirmed transactions and check commitments on Ethereum mainnet. Use when the user needs fast transaction confirmation or wants to send transactions through mev-commit.
 ---
 
 # mev-commit FAST RPC
@@ -18,8 +18,6 @@ Use it anywhere you would use an Ethereum RPC URL. It supports all standard `eth
 ## Core Concepts
 
 **Preconfirmation**: When you send a transaction through FAST RPC, a block builder issues a cryptographically signed commitment to include your transaction. This commitment is enforceable on-chain — if the builder breaks it, they get slashed. The result is near-instant transaction confirmation instead of waiting 12 seconds for the next block.
-
-**Gas Tank**: FAST RPC uses a gas tank system. Your account has a gas balance that gets debited when transactions are preconfirmed. Check your balance with the `gas_getBalance` method.
 
 ## Sending Preconfirmed Transactions
 
@@ -54,23 +52,6 @@ curl -X POST https://fastrpc.mev-commit.xyz \
   }'
 ```
 
-## Gas Tank
-
-The gas tank is a prepaid balance that covers preconfirmation fees.
-
-### Check Gas Balance
-
-```bash
-curl -X POST https://fastrpc.mev-commit.xyz \
-  -H "Content-Type: application/json" \
-  -d '{
-    "jsonrpc": "2.0",
-    "method": "gas_getBalance",
-    "params": ["0x YOUR_ADDRESS"],
-    "id": 1
-  }'
-```
-
 ## Supported Methods
 
 All standard Ethereum JSON-RPC methods are supported:
@@ -86,7 +67,6 @@ All standard Ethereum JSON-RPC methods are supported:
 - `eth_getBlockByHash` — get block by hash
 - `eth_chainId` — returns `0x1` (Ethereum mainnet)
 - `eth_gasPrice` — current gas price
-- `gas_getBalance` — check gas tank balance
 
 ## Using with ethers.js
 

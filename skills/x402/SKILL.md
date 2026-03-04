@@ -51,14 +51,17 @@ Response:
 
 ```json
 {
-  "supported": [
+  "kinds": [
     {
-      "asset": "USDC",
-      "network": "ethereum-mainnet",
-      "contract": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
-      "decimals": 6
+      "x402Version": 2,
+      "scheme": "exact",
+      "network": "eip155:1"
     }
-  ]
+  ],
+  "extensions": ["bazaar"],
+  "signers": {
+    "eip155:*": ["0x488d87a9A88a6A878B3E7cf0bEece8984af9518D"]
+  }
 }
 ```
 
@@ -80,7 +83,7 @@ curl -X POST https://facilitator.primev.xyz/settle \
       "signature": "0x EIP3009_SIGNATURE"
     },
     "asset": "USDC",
-    "network": "ethereum-mainnet"
+    "network": "eip155:1"
   }'
 ```
 
@@ -108,7 +111,7 @@ curl -X POST https://facilitator.primev.xyz/verify \
     "from": "0xAgentAddress",
     "to": "0xPublisherAddress",
     "value": "1000000",
-    "network": "ethereum-mainnet"
+    "network": "eip155:1"
   }'
 ```
 
@@ -292,7 +295,7 @@ app.get("/api/data", async (c) => {
         to: PUBLISHER_ADDRESS,
         amount: PRICE_USDC,
         asset: "USDC",
-        network: "ethereum-mainnet",
+        network: "eip155:1",
         facilitator: FACILITATOR,
       },
       402
@@ -308,7 +311,7 @@ app.get("/api/data", async (c) => {
     body: JSON.stringify({
       payment,
       asset: "USDC",
-      network: "ethereum-mainnet",
+      network: "eip155:1",
     }),
   });
 
