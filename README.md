@@ -10,7 +10,7 @@ claude plugin add primev/claude-plugin
 
 ## What's Included
 
-**3 skills + 1 MCP server** that give your Claude Code agent native access to Primev infrastructure.
+**3 skills + 2 MCP servers** that give your Claude Code agent native access to Primev infrastructure.
 
 ### Skills
 
@@ -39,6 +39,10 @@ The plugin registers `primev-fastrpc` as a stdio MCP server that wraps mev-commi
 | `x402_verify` | Verify an x402 payment on-chain |
 
 The MCP server runs locally via stdio — Claude Code spawns it as a subprocess. It makes HTTP calls to `https://fastrpc.mev-commit.xyz` and `https://facilitator.primev.xyz` on your behalf. No costs, no rate limits.
+
+### Docs Search
+
+The plugin also registers `primev-docs`, an HTTP MCP server powered by Mintlify that lets your agent search the full [Primev documentation](https://docs.primev.xyz) directly. When you ask questions about mev-commit, FAST RPC, validators, or any Primev concept, your agent can query the docs without leaving your terminal.
 
 ## Quick Start
 

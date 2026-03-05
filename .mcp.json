@@ -4,6 +4,10 @@
       "command": "node",
       "args": ["${CLAUDE_PLUGIN_ROOT}/mcp-server/index.js"],
       "type": "stdio"
+    },
+    "primev-docs": {
+      "type": "http",
+      "url": "https://docs.primev.xyz/mcp"
     }
   }
 }
