@@ -5,8 +5,11 @@ Primev infrastructure for Claude Code agents — preconfirmed transactions, gasl
 ## Install
 
 ```bash
-claude plugin add primev/claude-plugin
+claude plugin marketplace add primev/claude-plugin
+claude plugin install primev
 ```
+
+The first command registers the Primev marketplace. The second installs the plugin. You only need to add the marketplace once.
 
 ## What's Included
 
@@ -20,11 +23,11 @@ claude plugin add primev/claude-plugin
 | **fast-protocol** | Execute instant token swaps on Ethereum. Gasless ERC-20 swaps via EIP-712 signed intents, or direct ETH swaps through FAST RPC. Settles on Uniswap V3. |
 | **x402** | Agentic USDC payments over HTTP. Sign EIP-3009 authorizations, settle payments through the facilitator, and build pay-per-call APIs using HTTP 402. |
 
-### MCP Server
+### MCP Servers
 
-The plugin registers `primev-fastrpc` as a stdio MCP server that wraps mev-commit's FAST RPC and x402 facilitator endpoints as native MCP tools. No API keys required — all endpoints are public.
+The plugin registers two MCP servers:
 
-**9 tools available:**
+**primev-fastrpc** (stdio, 10 tools) — wraps mev-commit's FAST RPC and x402 facilitator endpoints as native MCP tools. No API keys required.
 
 | Tool | Description |
 |------|-------------|
@@ -33,16 +36,17 @@ The plugin registers `primev-fastrpc` as a stdio MCP server that wraps mev-commi
 | `eth_gasPrice` | Get current gas price |
 | `eth_getTransactionReceipt` | Check transaction status |
 | `eth_sendRawTransaction` | Send a preconfirmed transaction |
-| `eth_call` | Read-only contract call |
-| `eth_chainId` | Get chain ID |
+| `mevcommit_getTransactionCommitments` | Get preconfirmation commitments for a transaction |
+| `mevcommit_optInBlock` | Time until next mev-commit opted-in validator block |
+| `mevcommit_cancelTransaction` | Cancel a pending preconfirmation attempt |
 | `x402_supported` | Check supported x402 payment assets |
 | `x402_verify` | Verify an x402 payment on-chain |
 
-The MCP server runs locally via stdio — Claude Code spawns it as a subprocess. It makes HTTP calls to `https://fastrpc.mev-commit.xyz` and `https://facilitator.primev.xyz` on your behalf. No costs, no rate limits.
+**primev-docs** (HTTP) — powered by Mintlify, lets your agent search the full [Primev documentation](https://docs.primev.xyz) directly.
 
-### Docs Search
-
-The plugin also registers `primev-docs`, an HTTP MCP server powered by Mintlify that lets your agent search the full [Primev documentation](https://docs.primev.xyz) directly. When you ask questions about mev-commit, FAST RPC, validators, or any Primev concept, your agent can query the docs without leaving your terminal.
+| Tool | Description |
+|------|-------------|
+| `search_docs` | Search Primev documentation for any topic |
 
 ## Quick Start
 

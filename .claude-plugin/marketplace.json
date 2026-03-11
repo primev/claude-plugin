@@ -1,0 +1,25 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "primev",
+  "metadata": {
+    "description": "Primev infrastructure for Claude Code — preconfirmed transactions, gasless swaps, and agentic USDC payments on Ethereum"
+  },
+  "owner": {
+    "name": "Primev",
+    "email": "support@primev.xyz"
+  },
+  "plugins": [
+    {
+      "name": "primev",
+      "description": "Primev infrastructure for Claude Code — preconfirmed transactions, gasless swaps, and agentic USDC payments on Ethereum",
+      "version": "1.0.0",
+      "author": {
+        "name": "Primev",
+        "email": "support@primev.xyz"
+      },
+      "source": "./plugins/primev",
+      "category": "development",
+      "homepage": "https://primev.xyz/ai"
+    }
+  ]
+}

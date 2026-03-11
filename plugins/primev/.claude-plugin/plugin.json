@@ -2,7 +2,10 @@
   "name": "primev",
   "version": "1.0.0",
   "description": "Primev infrastructure for Claude Code — preconfirmed transactions, gasless swaps, and agentic USDC payments on Ethereum",
-  "author": "Primev",
+  "author": {
+    "name": "Primev",
+    "email": "support@primev.xyz"
+  },
   "homepage": "https://primev.xyz/ai",
   "repository": "https://github.com/primev/claude-plugin"
 }
