@@ -1,7 +1,7 @@
 {
   "name": "primev",
-  "version": "1.0.0",
-  "description": "Primev infrastructure for Claude Code — preconfirmed transactions, gasless swaps, and agentic USDC payments on Ethereum",
+  "version": "2.0.0",
+  "description": "Opt Ethereum validator keys into mev-commit from Claude, ChatGPT, or Grok",
   "author": {
     "name": "Primev",
     "email": "support@primev.xyz"

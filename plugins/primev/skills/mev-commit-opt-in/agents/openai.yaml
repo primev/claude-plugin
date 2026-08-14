@@ -1,0 +1,3 @@
+display_name: mev-commit opt-in
+short_description: Opt validator keys into mev-commit on Ethereum
+default_prompt: Opt these validator pubkeys into mev-commit and verify them on the Hub.
