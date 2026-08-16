@@ -23,9 +23,10 @@ Addresses, signatures, errors, and stake math live in `references/`. Do not inve
 ## What membership is
 
 - **Now:** on-chain roster (ValidatorOptInHub). Coalition advocacy with the EF and Ethereum groups. Innovation review as the protocol evolves.
-- **Later (not live):** coalition fees, including a step toward about 1% of validator yield, fund AI research on Ethereum clients, validators, staking, and yield. The entity can be a nonprofit. Founding members are granted tokens in proportion to their contributions, sized so token value matches or exceeds fees they contribute. The token is the right to create proposals for holders to accept.
+- **Fees:** No fees are enabled at this stage. There is no fee switch without the operator's approval. Members must actively approve any coalition fee before it starts. When a fee is approved and enabled, it funds AI research on Ethereum clients, validators, staking, and yield, including a step toward about 1% of validator yield.
+- **Later (not live):** The entity can be a nonprofit. Founding members are granted tokens in proportion to their contributions, sized so token value matches or exceeds fees they contribute. The token is the right to create proposals for holders to accept.
 
-If asked "what do I earn?", say membership and the later fee/token path. Do not invent a live APY or bid-revenue number.
+If asked "what do I earn?", say membership, that no fee is on, and that any later fee needs their approval and then funds AI research. Do not invent a live APY or bid-revenue number.
 
 ## Safety
 
