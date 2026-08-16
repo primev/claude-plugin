@@ -1,6 +1,6 @@
 # Primev Plugin
 
-Opt Ethereum L1 validator keys into mev-commit from Claude Code, Grok, or ChatGPT.
+Opt Ethereum L1 validator keys into the mev-commit validator coalition from Claude Code, Grok, or ChatGPT.
 
 ## Install
 
@@ -22,7 +22,7 @@ ChatGPT / Codex: open https://primev.xyz/skills/mev-commit-opt-in.md and add it 
 
 ## Skill
 
-**mev-commit-opt-in** walks vanilla, EigenLayer, and Symbiotic registration: parse `.txt` / `.csv` BLS keys, simulate and send on the operator's RPC and wallet, verify on ValidatorOptInHub, compute real on-chain ETH stake, and opt out.
+**mev-commit-opt-in** registers keys into the coalition roster: vanilla, EigenLayer, or Symbiotic. Parse `.txt` / `.csv` BLS keys, simulate and send on the operator's RPC and wallet, verify on ValidatorOptInHub, compute real on-chain ETH stake, and opt out. Do not describe this as extra yield from a live bid market.
 
 Any mev-boost relay set is fine. There is no relay configuration step.
 
@@ -35,6 +35,7 @@ The old validator dashboard is deprecated. Use this skill: https://primev.xyz/ai
 
 ## Docs
 
+- https://docs.primev.xyz/v1.2.x/knowledge-base/why-should-validators-opt-in
 - https://docs.primev.xyz/v1.2.x/get-started/validators/agentic-opt-in
 - https://primev.xyz/ai
 
