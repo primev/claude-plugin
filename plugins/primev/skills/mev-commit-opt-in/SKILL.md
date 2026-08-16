@@ -1,20 +1,32 @@
 ---
 name: mev-commit-opt-in
 description: >
-  Opt Ethereum L1 validator pubkeys into or out of mev-commit (vanilla, EigenLayer, Symbiotic).
-  Verify Hub status, send and confirm registry transactions on the operator's RPC and wallet,
-  and compute real on-chain ETH stake. Use when the user mentions validator opt-in, opt out,
-  VanillaRegistry, MevCommitAVS, MevCommitMiddleware, proposer registry, BLS pubkey registration,
-  or /mev-commit-opt-in.
+  Opt Ethereum L1 validator pubkeys into or out of the mev-commit validator coalition
+  (vanilla, EigenLayer, Symbiotic). Verify Hub status, send and confirm registry
+  transactions on the operator's RPC and wallet, and compute real on-chain ETH stake.
+  Coalition membership is one signal across keys, not extra bid revenue.
+  Use when the user mentions validator opt-in, opt out, VanillaRegistry, MevCommitAVS,
+  MevCommitMiddleware, proposer registry, BLS pubkey registration, or /mev-commit-opt-in.
 ---
 
 # mev-commit-opt-in
 
-Opt L1 validator BLS pubkeys into mev-commit by calling the published registry contracts on Ethereum. Replicate the old dashboard wizard without the relay checkbox. Any mev-boost relay set is fine.
+Register L1 validator BLS pubkeys into the **mev-commit validator coalition** by calling the published registry contracts on Ethereum. Hub-true keys are one signal across many validators: mev-forward, innovation-forward, used for Ethereum policy and later coalition fees.
+
+This is **not** extra block revenue from a live commitment market. Do not tell the operator they now earn yield from mev-commit bids, preconfs, or a running network. Any mev-boost relay set is fine. No relay checkbox.
 
 Canonical page: https://primev.xyz/ai
-Docs: https://docs.primev.xyz/v1.2.x/get-started/validators/agentic-opt-in
+Why: https://docs.primev.xyz/v1.2.x/knowledge-base/why-should-validators-opt-in
+How: https://docs.primev.xyz/v1.2.x/get-started/validators/agentic-opt-in
 Addresses, signatures, errors, and stake math live in `references/`. Do not invent other contracts.
+
+## What membership is
+
+- **Now:** on-chain roster (ValidatorOptInHub). Coalition advocacy with the EF and Ethereum groups. Innovation review as the protocol evolves.
+- **Fees:** No fees are enabled at this stage. There is no fee switch without the operator's approval. Members must actively approve any coalition fee before it starts. When a fee is approved and enabled, it funds AI research on Ethereum clients, validators, staking, and yield, including a step toward about 1% of validator yield.
+- **Later (not live):** The entity can be a nonprofit. Founding members are granted tokens in proportion to their contributions, sized so token value matches or exceeds fees they contribute. The token is the right to create proposals for holders to accept.
+
+If asked "what do I earn?", say membership, that no fee is on, and that any later fee needs their approval and then funds AI research. Do not invent a live APY or bid-revenue number.
 
 ## Safety
 
