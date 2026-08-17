@@ -22,7 +22,7 @@ ChatGPT / Codex: open https://primev.xyz/skills/mev-commit-opt-in.md and add it 
 
 ## Skill
 
-**mev-commit-opt-in** registers keys into the coalition roster: vanilla, EigenLayer, or Symbiotic. Parse `.txt` / `.csv` BLS keys, simulate and send on the operator's RPC and wallet, verify on ValidatorOptInHub, compute real on-chain ETH stake, and opt out. Do not describe this as extra yield from a live bid market.
+**mev-commit-opt-in** registers keys into the coalition roster: vanilla, EigenLayer, or Symbiotic. Parse `.txt` / `.csv` BLS keys, simulate and send on the operator's RPC and wallet (or hand-hold a Safe / multi-sig propose → sign → execute), verify on ValidatorOptInHub, compute real on-chain ETH stake, and opt out. Do not describe this as extra yield from a live bid market. Done means Hub `true`, not a receipt.
 
 Any mev-boost relay set is fine. There is no relay configuration step.
 

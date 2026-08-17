@@ -57,3 +57,5 @@ cast call $CONTRACT "$SIG" $ARGS --from $SENDER --rpc-url $RPC
 cast send $CONTRACT "$SIG" $ARGS --rpc-url $RPC
 cast receipt $TX --rpc-url $RPC
 ```
+
+If `$SENDER` is a Safe / multi-sig, **do not** `cast send`. Encode with `cast calldata` and follow `references/safe.md`. Simulate with `--from $SAFE`. Completion is still Hub `areValidatorsOptedIn`.

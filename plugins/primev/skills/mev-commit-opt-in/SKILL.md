@@ -6,7 +6,8 @@ description: >
   transactions on the operator's RPC and wallet, and compute real on-chain ETH stake.
   Coalition membership is one signal across keys, not extra bid revenue.
   Use when the user mentions validator opt-in, opt out, VanillaRegistry, MevCommitAVS,
-  MevCommitMiddleware, proposer registry, BLS pubkey registration, or /mev-commit-opt-in.
+  MevCommitMiddleware, proposer registry, BLS pubkey registration, Gnosis Safe,
+  multi-sig, or /mev-commit-opt-in.
 ---
 
 # mev-commit-opt-in
@@ -33,7 +34,8 @@ If asked "what do I earn?", say membership, that no fee is on, and that any late
 - Never print, log, commit, or write a private key. Prefer Foundry keystore, `cast wallet`, or hardware. Use `PRIVATE_KEY` only if the operator insists.
 - Only register pubkeys the operator controls. Registering someone else's key can be slashed.
 - One pubkey, one method. Do not double-register.
-- Simulate every write, then send on **their** `ETH_RPC_URL` (L1, chain id 1 or Hoodi 560048). Wait for the receipt. Then verify on the Hub.
+- If the signer is a **Safe / Gnosis / multi-sig**, do **not** `cast send`. Follow `references/safe.md`. Never collect owner keys.
+- Simulate every write, then send on **their** `ETH_RPC_URL` (L1, chain id 1 or Hoodi 560048) **only for EOAs**. Wait for the receipt. Then verify on the Hub.
 - Batch 40 to 60 keys per transaction.
 
 ## Keys
@@ -48,9 +50,9 @@ Accept `.txt`, `.csv`, paste, newlines, or commas. Normalize each entry to `0x` 
 
 1. Choose method: **vanilla** (simple ETH), **eigenlayer**, or **symbiotic**. Hoodi-only extras: Lido, Rocket Pool (link the docs path pages; do not improvise).
 2. Parse keys. Confirm count and first/last pubkey with the operator.
-3. Confirm signer + `ETH_RPC_URL`.
-4. Simulate, send, wait for receipt, then Hub-verify every key.
-5. Report: method, key count, tx hash, Etherscan/Hoodi link, Hub booleans, next step.
+3. Confirm signer + `ETH_RPC_URL`. Ask if this is a Safe / multi-sig. If the address has contract code, treat it as a Safe. Then follow `references/safe.md` and skip step 4 send.
+4. EOA only: simulate, send, wait for receipt, then Hub-verify every key.
+5. Report: method, key count, tx hash (if any), Etherscan or Hoodi link, Hub booleans, next step. **Done means Hub `true` on every key**, not a Safe "success" banner and not a receipt alone.
 
 No relay configuration step.
 
@@ -77,7 +79,9 @@ isValidatorOptedIn(bytes)(bool)
 areValidatorsOptedIn(bytes[])(bool[])
 ```
 
-A receipt is not enough. Hub `true` is opted in.
+A receipt is not enough. A Safe UI "Success" is not enough. Hub `true` is opted in.
+
+If they used a Safe, poll Hub (`areValidatorsOptedIn` on the exact set) after they execute. If they pasted an L1 hash, check `cast receipt` first, then still Hub-check. See `references/safe.md`.
 
 ## Status (no performance analytics)
 
